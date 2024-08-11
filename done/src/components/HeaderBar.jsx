@@ -50,7 +50,7 @@ const HeaderBar = ({ onLogout, isLoggedIn }) => {
         fontWeight: '600', // Slightly lighter font weight
         fontFamily: 'Roboto, sans-serif',
       }}>
-        My Application
+        Block Evidence
       </Typography>
       {isLoggedIn && (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

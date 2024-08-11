@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, TextField, Container, Box, Typography, Alert } from '@mui/material';
+import logo from '../assets/logo.png'; // Adjust the path based on your file structure
 
 const LoginPage = ({ onLogin }) => {
   const [id, setId] = useState('');
@@ -31,54 +32,88 @@ const LoginPage = ({ onLogin }) => {
 
   return (
     <Container maxWidth="sm">
-      <Box sx={{ mt: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Login
+      <Box
+        sx={{
+          mt: 6,
+          p: 4,
+          borderRadius: '12px',
+          boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
+          backgroundColor: '#fff',
+          textAlign: 'center',
+        }}
+      >
+        {/* Block Evidence Logo */}
+        <Box sx={{ mb: 4 }}>
+          <img src={logo} alt="Block Evidence" width="120" />
+        </Box>
+
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
+          Block Evidence Login
         </Typography>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
+          <Alert severity="error" sx={{ mb: 3 }}>
             {error}
           </Alert>
         )}
 
         {!loginMode ? (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Button 
-              variant="contained" 
-              onClick={() => handleLoginClick('Collector')} 
-              sx={{ borderRadius: '8px' }}
+            <Button
+              variant="contained"
+              onClick={() => handleLoginClick('Collector')}
+              sx={{
+                borderRadius: '8px',
+                py: 1.5,
+                fontSize: '1rem',
+                textTransform: 'none',
+              }}
             >
-              Collector
+              Login as Collector
             </Button>
-            <Button 
-              variant="contained" 
-              onClick={() => handleLoginClick('CSA')} 
-              sx={{ borderRadius: '8px' }}
+            <Button
+              variant="contained"
+              onClick={() => handleLoginClick('CSA')}
+              sx={{
+                borderRadius: '8px',
+                py: 1.5,
+                fontSize: '1rem',
+                textTransform: 'none',
+              }}
             >
-              CSA
+              Login as CSA
             </Button>
-            <Button 
-              variant="contained" 
-              onClick={() => handleLoginClick('Guest')} 
-              sx={{ borderRadius: '8px' }}
+            <Button
+              variant="contained"
+              onClick={() => handleLoginClick('Guest')}
+              sx={{
+                borderRadius: '8px',
+                py: 1.5,
+                fontSize: '1rem',
+                textTransform: 'none',
+              }}
             >
-              Guest
+              Login as Guest
             </Button>
-            <Button 
-              variant="contained" 
-              onClick={() => handleLoginClick('Company')} 
-              sx={{ borderRadius: '8px' }}
+            <Button
+              variant="contained"
+              onClick={() => handleLoginClick('Company')}
+              sx={{
+                borderRadius: '8px',
+                py: 1.5,
+                fontSize: '1rem',
+                textTransform: 'none',
+              }}
             >
-              Company
+              Login as Company
             </Button>
           </Box>
         ) : (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Button 
-              variant="outlined" 
-              onClick={handleBackToChoosing} 
-              sx={{ marginBottom: 2, borderRadius: '8px' }}
+            <Button
+              variant="outlined"
+              onClick={handleBackToChoosing}
+              sx={{ mb: 2, borderRadius: '8px', fontSize: '1rem', textTransform: 'none' }}
             >
               Back to Choosing
             </Button>
@@ -97,10 +132,15 @@ const LoginPage = ({ onLogin }) => {
               fullWidth
               sx={{ mb: 2 }}
             />
-            <Button 
-              variant="contained" 
-              onClick={handleSubmit} 
-              sx={{ borderRadius: '8px' }}
+            <Button
+              variant="contained"
+              onClick={handleSubmit}
+              sx={{
+                borderRadius: '8px',
+                py: 1.5,
+                fontSize: '1rem',
+                textTransform: 'none',
+              }}
             >
               Login as {loginMode}
             </Button>
