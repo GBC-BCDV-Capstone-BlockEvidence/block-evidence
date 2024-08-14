@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Box, Typography, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Alert, CircularProgress } from '@mui/material';
+import { 
+  Container, 
+  Box, 
+  Typography, 
+  TextField, 
+  Button, 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableContainer, 
+  TableHead, 
+  TableRow, 
+  Paper, 
+  Alert, 
+  CircularProgress 
+} from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircleOutlined';
 import ErrorIcon from '@mui/icons-material/ErrorOutlined';
 
@@ -42,6 +57,19 @@ const GuestPage = ({ account }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(parseInt(timestamp) * 1000);
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZone: 'America/New_York'
+    }) + ' GMT-4';
   };
 
   return (
@@ -93,45 +121,49 @@ const GuestPage = ({ account }) => {
             </Typography>
             <TableContainer component={Paper}>
               <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>ID</TableCell>
-                    <TableCell>Owner</TableCell>
-                    <TableCell>Creator</TableCell>
-                    <TableCell>Description</TableCell>
-                    <TableCell>Addresses</TableCell>
-                    <TableCell>Times</TableCell>
-                    <TableCell>Logs</TableCell>
-                    <TableCell>IPFS Hash</TableCell>
-                  </TableRow>
-                </TableHead>
                 <TableBody>
                   <TableRow>
+                    <TableCell component="th" scope="row">ID</TableCell>
                     <TableCell>{evidenceBasic?.id}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">Owner</TableCell>
                     <TableCell>{evidenceBasic?.owner}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">Creator</TableCell>
                     <TableCell>{evidenceBasic?.creator}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">Description</TableCell>
                     <TableCell>{evidenceBasic?.description}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">Addresses</TableCell>
                     <TableCell>
-                      <ul style={{ padding: 0, margin: 0 }}>
-                        {evidenceDetails?.addresses.map((address, index) => (
-                          <li key={index}>{address}</li>
-                        ))}
-                      </ul>
+                      {evidenceDetails?.addresses.map((address, index) => (
+                        <Typography key={index} variant="body2">{address}</Typography>
+                      ))}
                     </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">Times</TableCell>
                     <TableCell>
-                      <ul style={{ padding: 0, margin: 0 }}>
-                        {evidenceDetails?.times.map((time, index) => (
-                          <li key={index}>{new Date(parseInt(time) * 1000).toLocaleString()}</li>
-                        ))}
-                      </ul>
+                      {evidenceDetails?.times.map((time, index) => (
+                        <Typography key={index} variant="body2">{formatTimestamp(time)}</Typography>
+                      ))}
                     </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">Logs</TableCell>
                     <TableCell>
-                      <ul style={{ padding: 0, margin: 0 }}>
-                        {evidenceDetails?.logs.map((log, index) => (
-                          <li key={index}>{log}</li>
-                        ))}
-                      </ul>
+                      {evidenceDetails?.logs.map((log, index) => (
+                        <Typography key={index} variant="body2">{log}</Typography>
+                      ))}
                     </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">IPFS Hash</TableCell>
                     <TableCell>{evidenceDetails?.ipfsHash}</TableCell>
                   </TableRow>
                 </TableBody>

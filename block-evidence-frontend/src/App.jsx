@@ -7,6 +7,8 @@ import CSAPage from './pages/CSAPage';
 import GuestPage from './pages/GuestPage';
 import CompanyPage from './pages/CompanyPage';
 import TransferDataPage from './pages/TransferDataPage';
+import TransferPage from './pages/TransferPage';
+import AddLogsPage from './pages/AddLogsPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -95,6 +97,14 @@ function App() {
         <Route 
           path="/transfer" 
           element={isLoggedIn ? <TransferDataPage account={account} /> : <Navigate to="/" />} 
+        />
+        <Route 
+          path="/transferpage" 
+          element={isLoggedIn ? <TransferPage account={account} /> : <Navigate to="/" />} 
+        />
+        <Route 
+          path="/addlog" 
+          element={isLoggedIn ? <AddLogsPage account={account} /> : <Navigate to="/" />} 
         />
       </Routes>
     </div>

@@ -159,6 +159,27 @@ const CSAPage = () => {
     navigate('/transfer');
   };
 
+  const handleAddLogsClick = () => {
+    navigate('/addlog'); 
+  };
+
+  const convertToGMT4 = (timestamp) => {
+    const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+    date.setHours(date.getHours() - 4); // Adjust for GMT-4
+    
+    const options = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZone: 'America/New_York' // This ensures correct DST handling
+    };
+    
+    return date.toLocaleString('en-US', options) + ' GMT-4';
+  };
+
   return (
     <Container maxWidth="md">
       <Box sx={{ mt: 4, textAlign: 'center' }}>
@@ -217,6 +238,16 @@ const CSAPage = () => {
           >
             Transfer Evidence
           </Button>
+
+          <Button 
+            variant="contained" 
+            color="primary"
+            onClick={handleAddLogsClick} // Navigate to AddLogsPage
+            sx={{ borderRadius: '8px', padding: '12px 24px', mt: 2 }}
+          >
+            Add Logs
+          </Button>
+        
         </Box>
 
         {(evidenceBasic || evidenceDetails) && (
@@ -238,7 +269,7 @@ const CSAPage = () => {
                   <Divider sx={{ my: 2 }} />
                   <Typography><strong>IPFS Hash:</strong> {evidenceDetails.ipfsHash}</Typography>
                   <Typography><strong>Addresses:</strong> {evidenceDetails.addresses.join(', ')}</Typography>
-                  <Typography><strong>Times:</strong> {evidenceDetails.times.join(', ')}</Typography>
+                  <Typography><strong>Times (GMT-4):</strong> {evidenceDetails.times.map(convertToGMT4).join(', ')}</Typography>
                   <Typography><strong>Logs:</strong> {evidenceDetails.logs.join(', ')}</Typography>
                   <IPFSImage hash={evidenceDetails.ipfsHash} />
                 </Box>
